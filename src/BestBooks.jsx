@@ -1,65 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
+import { Alert } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 
-let url = import.meta.env.VITE_LOCAL_SERVER
 
-async function BestBooks() {
+let SERVER = import.meta.env.VITE_LOCAL_SERVER;
+
+function BestBooks() {
   const [books, setBooks] = useState([]);
-  if (books.length>0) {
-    try {
-      let response = await axios.get(`${url}/books`);
-      setBooks(response.data);
-      booklist = books;
-      // console.log(response.data);
-    } catch(error) {
-      setErrorMessage(error.message);
-    }
-  
 
-  // TODO: Make a GET request to your API to fetch all the books from the database
-  // useEffect(() => {
-  //   fetchBooks();
-  // }, []);
-    // console.log(props.booklist.title);
+  const getBooks = async () => {
+    try {
+      let response = await axios.get(`${SERVER}/books`);
+      setBooks(response.data);
+    } catch (error) {
+      setBooks([]); 
+    }
+  };
+
+  if (books.length === 0) {
+    getBooks();
+  }
   return (
     <>
       <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-      <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item>
-        <ExampleCarouselImage text="First slide" />
-        <Carousel.Caption>
-          <h3>{props.booklist.title}</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <ExampleCarouselImage text="Second slide" />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <ExampleCarouselImage text="Third slide" />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+      {books.length > 0 ? (
+        <Carousel>
+          {books.map((book, i) => (
+            <Carousel.Item key={i}>
+            <Image text="1st book" />
+            <Carousel.Caption>
+                <h3>{book.title}</h3>
+                <p>{book.description}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      ) : (
+        <Alert variant="info">Book Collection is Empty</Alert>
+      )}
     </>
-    )
-  }
+  );
 }
 
-{/* 
-      {this.state.books.length ? (
-        <p>Book Carousel coming soon</p>
-      ) : (
-        <h3>No Books Found :(</h3>
-      )} */}
-
 export default BestBooks;
+
+
+
+
+
+
+
