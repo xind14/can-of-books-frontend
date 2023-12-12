@@ -5,6 +5,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { Image } from 'react-bootstrap';
 // import Alert from 'react-bootstrap/Alert';
 // import Button from 'react-bootstrap/Button';
+import BookFormModal from './Components/BookFormModal';
 import EmptyLibrary from './Components/EmptyLibrary';
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
@@ -14,6 +15,10 @@ console.log(url);
 function BestBooks(props) {
   const [books, setBooks] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [modalShow, setShowModal] = useState(false);
+
+
+
 
   const FetchBooks = async () => {
     try {
@@ -49,6 +54,7 @@ function BestBooks(props) {
                   <Carousel.Caption>
                     <h3>{book.title}</h3>
                     <p>{book.description}</p>
+                    <p>{book.status}</p>
                   </Carousel.Caption>
                 </Carousel.Item>
               );           

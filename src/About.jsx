@@ -6,3 +6,16 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+
+
+function About() {
+  return (
+      <>
+          <p>This is the About Page</p>
+      </>
+  )
+}
+
+export default About;
