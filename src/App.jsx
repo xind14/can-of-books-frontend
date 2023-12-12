@@ -2,12 +2,14 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks';
+import About from './About'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
+import Profile from './About';
 
 function App () {
   return (
@@ -20,16 +22,16 @@ function App () {
               element={<BestBooks />}
               >
             </Route>
-            {/* <Route 
+            <Route 
               exact path="/about"
-              // element={< />}
+              element={<About />}
               >
-            </Route> */}
-            {/* <Route 
-              exact path="/books"
-              element={<BestBooks />}
+            </Route>
+            <Route 
+              exact path="/profile"
+              element={<Profile />}
               >
-            </Route> */}
+            </Route>
             {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
           </Routes>
           <Footer />
