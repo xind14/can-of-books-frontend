@@ -12,13 +12,29 @@ import {
 function App () {
   return (
     <>
-      <h1>Can-of-Books</h1>
-      <div>
-        <Header />
-        {/* <BestBooks booklist = {bookdata} /> */}
-        <Footer />
-      </div>
-    </>
+      <Router>
+          <Header />
+          <Routes>
+          <Route 
+              exact path="/"
+              element={<BestBooks />}
+              >
+            </Route>
+            {/* <Route 
+              exact path="/about"
+              // element={< />}
+              >
+            </Route> */}
+            {/* <Route 
+              exact path="/books"
+              element={<BestBooks />}
+              >
+            </Route> */}
+            {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
+          </Routes>
+          <Footer />
+        </Router>
+      </>
   )
 }
 
