@@ -21,6 +21,7 @@ function App () {
               exact path="/"
               element={<BestBooks />}
               >
+
             </Route>
             <Route 
               exact path="/about"
@@ -31,7 +32,10 @@ function App () {
               exact path="/profile"
               element={<Profile />}
               >
+
             </Route>
+            
+            
             {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
           </Routes>
           <Footer />
