@@ -172,3 +172,55 @@ Friday:
   lsof -i :3000 = error address already in use
   kill -9 <PID>
   npx kill-port 3000 -->
+
+
+
+## Logistical
+
+1. What hours will you be available to communicate?
+    - 9am-6pm(possibly later) PST
+2. What platform will you use to communicate (ie. Slack, phone …)?
+    - Slack
+3. How often will you take breaks?
+    - As needed
+4. What is your plan if you start to fall behind?
+    - The team is in agreement if extra hours are needed we will commit more time and not be afraid of asking for help.
+
+## Cooperative
+
+1. Make a list of each parson’s strengths.
+    - Johnny: Equally bad at all aspects of coding, but reasonably good at breaking down complex tasks into smaller functions.
+    - Xin: Turns in things, also equally bad at coding here, can help with syntax check
+2. How can you best utilize these strengths in the development of your application?
+    - To optimize the team's performance in the project, Johnny's general coding skills can be used for tasks that require basic coding knowledge and Xin's reliability in meeting deadlines should be utilized for maintaining project timelines.
+3. In what areas do you each want to develop greater strength?
+    - Johnny: Collaboration
+    - Xin: The Teamwork Competency: Collaboration
+4. Knowing that every person in your team needs to understand the code, how do you plan to approach the day-to-day development?
+    - Clear Project Overview
+        - Document the project
+        - Regular team meetings 
+    - Collaborative Tools and Documentation
+        - Use Project management tools (Trello)
+    - Task Distribution
+        - Define roles and responsibilities
+        - Encourage Questions and Discussions
+        - Open communication on slack
+        - Constructive Feedback
+
+
+## Conflict Resolution
+
+1. What will your team do if one person is pulling all the weight while the other person is not contributing?
+    - Open Communication: We will encourage open and honest communication within the team. Team members should feel comfortable expressing their concerns, ideas, and disagreements.
+    - Identify the Issue: When a conflict arises, we will work together to clearly identify the specific issue or disagreement. It's important to understand the root cause of the conflict.
+    - Discussion and Resolution: The team will engage in a constructive discussion to find a solution. All team members will have the opportunity to share their perspectives, and we will seek a resolution that takes into account everyone's input
+    - Consensus or Compromise: We will strive to reach a consensus whenever possible. If a consensus is not achievable, we will consider compromise, making sure all team members are comfortable with the solution.
+    - Documentation: We will document the agreed-upon resolution and ensure that everyone understands their roles and responsibilities moving forward.
+2. What will your team do if one person is taking over the project and not letting the other member contribute?
+    - If one team member is taking over the project and not allowing others to contribute, we will address this issue promptly.
+    - The team will hold a discussion, reminding everyone of the importance of equal contributions and collaboration.
+    - We will encourage the dominant member to listen actively to other team members' ideas and feedback.
+    - If the issue persists, we will involve a TA or course instructor to mediate and ensure fair participation.
+3. How will you approach each other and the challenge of building an application knowing that it is impossible for two people to be at the exact same place in understanding and skill level?
+    - 
