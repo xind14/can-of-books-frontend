@@ -6,8 +6,8 @@ import { Image } from 'react-bootstrap';
 // import Button from 'react-bootstrap/Button';
 import EmptyLibrary from './Components/EmptyLibrary';
 
-let url = import.meta.env.VITE_LOCAL_SERVER;
-
+const url = import.meta.env.VITE_LOCAL_SERVER;
+console.log(url);
 
   
 function BestBooks(props) {
@@ -16,29 +16,38 @@ function BestBooks(props) {
 
   const FetchBooks = async () => {
     try {
+      console.log(`${url}/books`);
       let response = await axios.get(`${url}/books`);
+      console.log(response.data);
       setBooks(response.data);
       if (response.data.length === 0) {
         setShowAlert(true);
-        return <EmptyLibrary show={showAlert}/>; 
       } 
     } catch (error) {
-      console.log('error'); 
+      console.error(error.message); 
       }
   };
+  
+  useEffect(() => {
+    console.log("Mount up")
+    FetchBooks();
+    return () => {
+      console.log("Unmount");
+    }
+  });
   
     if (books.length > 0) {  
       return (
         <>
           <Carousel>
             {/* <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2> */}
-            {books.map((book, i) => {
+            {books.map((book) => {
               return(
-                <Carousel.Item key={books[i]._id}>
-                  <Image src='/images/placeholder.png' alt='image of bookcover' />
+                <Carousel.Item key={book._id}>
+                  <Image style ={{width: '100%'}}src='/images/placeholder.png' alt='image of bookcover' />
                   <Carousel.Caption>
-                    <h3>{books[i].title}</h3>
-                    <p>{books[i].description}</p>
+                    <h3>{book.title}</h3>
+                    <p>{book.description}</p>
                   </Carousel.Caption>
                 </Carousel.Item>
               );           
@@ -47,15 +56,8 @@ function BestBooks(props) {
         </>
       );
   }
-
-  useEffect(() => {
-    console.log("Mount up")
-    FetchBooks();
-    return () => {
-      console.log("Unmount");
-    }
-  }, []);
-  }
+  return <EmptyLibrary show={showAlert}/>; 
+}
 
 //   useEffect(() => {
 //     FetchBooks();  
