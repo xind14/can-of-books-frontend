@@ -7,7 +7,7 @@ import Image from 'react-bootstrap/Image';
 
 let SERVER = import.meta.env.VITE_LOCAL_SERVER;
 
-function BestBooks() {
+function BestBooks(props) {
   const [books, setBooks] = useState([]);
 
   const getBooks = async () => {
@@ -27,12 +27,14 @@ function BestBooks() {
       <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
       {books.length > 0 ? (
         <Carousel>
-          {books.map((book, i) => (
-            <Carousel.Item key={i}>
+          {props.books.map((book) => (
+            <Carousel.Item key={book._id}>
             <Image text="1st book" />
             <Carousel.Caption>
                 <h3>{book.title}</h3>
                 <p>{book.description}</p>
+                <p>{book.status}</p>
+
               </Carousel.Caption>
             </Carousel.Item>
           ))}
