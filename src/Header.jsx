@@ -18,10 +18,11 @@ function Header(props) {
             <Nav.Link href="/about">About</Nav.Link>
             <DropdownButton id="dropdown-item-button" title="Menu">
               <Dropdown.ItemText></Dropdown.ItemText>
-              <Dropdown.Item as="button">Action</Dropdown.Item>
-              <Dropdown.Item as="button">Another action</Dropdown.Item>
+              <Dropdown.Item href="/addBook">Add Books</Dropdown.Item>
+              <Dropdown.Item href="/updateBook">Update a Book</Dropdown.Item>
+              <Dropdown.Item href="/deleteBook">Delete a Book</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item as="button" onClick={props.handleGetBooks}>Get Books</Dropdown.Item>
+              <Dropdown.Item href="/books">Get Books</Dropdown.Item>
             </DropdownButton>
           </Nav>
         </Navbar.Collapse>
