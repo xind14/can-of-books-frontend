@@ -2,9 +2,14 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
-function Header() {
+// let url = import.meta.env.VITE_LOCAL_SERVER;
+
+
+
+function Header(props) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -14,17 +19,14 @@ function Header() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/books">
-                Get Books
-              </NavDropdown.Item>
-            </NavDropdown>
+            <DropdownButton id="dropdown-item-button" title="Menu">
+              <Dropdown.ItemText></Dropdown.ItemText>
+              <Dropdown.Item href="/addBook">Add Books</Dropdown.Item>
+              <Dropdown.Item href="/updateBook">Update a Book</Dropdown.Item>
+              <Dropdown.Item href="/deleteBook">Delete a Book</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="/books">Get Books</Dropdown.Item>
+            </DropdownButton>
           </Nav>
         </Navbar.Collapse>
       </Container>

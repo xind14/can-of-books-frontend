@@ -2,51 +2,69 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
-import { Alert } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
+import { Image } from 'react-bootstrap';
+// import Alert from 'react-bootstrap/Alert';
+// import Button from 'react-bootstrap/Button';
+import EmptyLibrary from './Components/EmptyLibrary';
 
+const url = import.meta.env.VITE_LOCAL_SERVER;
+console.log(url);
 
-let SERVER = import.meta.env.VITE_LOCAL_SERVER;
-
+  
 function BestBooks(props) {
   const [books, setBooks] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
 
-  const getBooks = async () => {
+  const FetchBooks = async () => {
     try {
-      let response = await axios.get(`${SERVER}/books`);
+      console.log(`${url}/books`);
+      let response = await axios.get(`${url}/books`);
+      console.log(response.data);
       setBooks(response.data);
+      if (response.data.length === 0) {
+        setShowAlert(true);
+      } 
     } catch (error) {
-      setBooks([]); 
-    }
+      console.error(error.message); 
+      }
   };
-
-  if (books.length === 0) {
-    getBooks();
+  
+  useEffect(() => {
+    console.log("Mount up")
+    FetchBooks();
+    return () => {
+      console.log("Unmount");
+    }
+  });
+  
+    if (books.length > 0) {  
+      return (
+        <>
+          <Carousel>
+            {/* <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2> */}
+            {books.map((book) => {
+              return(
+                <Carousel.Item key={book._id}>
+                  <Image style ={{width: '100%'}}src='/images/placeholder.png' alt='image of bookcover' />
+                  <Carousel.Caption>
+                    <h3>{book.title}</h3>
+                    <p>{book.description}</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              );           
+            })}
+          </Carousel>
+        </>
+      );
   }
-  return (
-    <>
-      <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-      {books.length > 0 ? (
-        <Carousel>
-          {props.books.map((book) => (
-            <Carousel.Item key={book._id}>
-            <Image text="1st book" />
-            <Carousel.Caption>
-                <h3>{book.title}</h3>
-                <p>{book.description}</p>
-                <p>{book.status}</p>
-
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      ) : (
-        <Alert variant="info">Book Collection is Empty</Alert>
-      )}
-    </>
-  );
+  return <EmptyLibrary show={showAlert}/>; 
 }
 
+//   useEffect(() => {
+//     FetchBooks();  
+//   }, [books])
+//   }
+// }
 
 export default BestBooks;
 
