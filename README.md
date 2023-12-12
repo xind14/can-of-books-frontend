@@ -223,4 +223,5 @@ Friday:
     - We will encourage the dominant member to listen actively to other team members' ideas and feedback.
     - If the issue persists, we will involve a TA or course instructor to mediate and ensure fair participation.
 3. How will you approach each other and the challenge of building an application knowing that it is impossible for two people to be at the exact same place in understanding and skill level?
-    - 
+    - We understand that team members may have different levels of understanding and skill. We will approach this diversity as an opportunity for learning and growth.
+    - We will promote a process by which more experienced members can assist those who may need additional support.
