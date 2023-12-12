@@ -9,25 +9,17 @@ import {
   Route
 } from "react-router-dom";
 
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        <Router>
-          <Header />
-          <Routes>
-            <Route 
-              exact path="/"
-              element={<BestBooks />}
-            >
-            </Route>
-            {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
-          </Routes>
-          <Footer />
-        </Router>
-      </>
-    )
-  }
+function App () {
+  return (
+    <>
+      <h1>Can-of-Books</h1>
+      <div>
+        <Header />
+        {/* <BestBooks booklist = {bookdata} /> */}
+        <Footer />
+      </div>
+    </>
+  )
 }
 
 export default App;
