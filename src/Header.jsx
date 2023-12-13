@@ -6,7 +6,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import BookFormModal from './Components/BookFormModal';
 
-// let url = import.meta.env.VITE_LOCAL_SERVER;
 
 
 
@@ -33,7 +32,9 @@ function Header() {
             <Nav.Link href="/about">About</Nav.Link>
             <DropdownButton id="dropdown-item-button" title="Menu">
               <Dropdown.ItemText></Dropdown.ItemText>
-              <Dropdown.Item onClick={() => setShowModal(true)}>Add Books</Dropdown.Item>
+
+              <Dropdown.Item onClick={showModal ? undefined : () => setShowModal(true)}>Add Books</Dropdown.Item>
+
               <Dropdown.Item href="/updateBook">Update a Book</Dropdown.Item>
               <Dropdown.Item href="/deleteBook">Delete a Book</Dropdown.Item>
               <Dropdown.Divider />
