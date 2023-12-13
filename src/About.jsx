@@ -1,8 +1,11 @@
 import React from "react";
 
-const Profile = () => {
-  /* TODO: render information about the developers */
-  return <p>Profile page coming soon</p>;
-};
+function About() {
+  return (
+      <>
+          <p>This is the About Page</p>
+      </>
+  )
+}
 
-export default Profile;
+export default About;

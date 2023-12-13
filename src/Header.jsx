@@ -21,7 +21,7 @@ function Header(props) {
             <Nav.Link href="/about">About</Nav.Link>
             <DropdownButton id="dropdown-item-button" title="Menu">
               <Dropdown.ItemText></Dropdown.ItemText>
-              <Dropdown.Item href="/addBook">Add Books</Dropdown.Item>
+              <Dropdown.Item  onClick={props.modalShow}>Add Books</Dropdown.Item>
               <Dropdown.Item href="/updateBook">Update a Book</Dropdown.Item>
               <Dropdown.Item href="/deleteBook">Delete a Book</Dropdown.Item>
               <Dropdown.Divider />
