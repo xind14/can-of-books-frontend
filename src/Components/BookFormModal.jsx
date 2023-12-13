@@ -58,7 +58,6 @@ function handleSubmit = async(event)=>{
                       <option value="Favorites">Favorites</option>
                       <option value="Recommended">Recommended</option>
                             </Form.Select>
-                    <Button type='submit'>Save Book</Button>
                  </Form.Group>
              </Form>
                 </div>

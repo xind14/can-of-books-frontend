@@ -17,8 +17,17 @@ function BestBooks(props) {
   const [showAlert, setShowAlert] = useState(false);
   const [modalShow, setShowModal] = useState(false);
 
-
-
+  function handleDelete = async(event)=>{
+    try{
+  let response = await axios.delete(`${url}/books${event.target.id}`);
+  let book = response.data;
+  let newBooks = books.filter((book) => {
+    return book.id !== event.target.id;
+  })
+  setBooks(newBooks);
+} catch (error) { 
+  console.error(error.message)
+ };
 
   const FetchBooks = async () => {
     try {
@@ -46,7 +55,7 @@ function BestBooks(props) {
       return (
         <>
           <Carousel>
-            {/* <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2> */}
+            <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
             {books.map((book) => {
               return(
                 <Carousel.Item key={book._id}>
@@ -55,22 +64,22 @@ function BestBooks(props) {
                     <h3>{book.title}</h3>
                     <p>{book.description}</p>
                     <p>{book.status}</p>
+                    <span onClick={handleDelete} id={book._id} style={{ marginLeft:".5em", color:"red", cursor:"pointer"}}>Delete Book</span>
                   </Carousel.Caption>
+
                 </Carousel.Item>
               );           
             })}
           </Carousel>
+          <BookFormModal setBooks={setBooks} books={books} show={modalShow} onHide={() => setModalShow(false)}></BookFormModal>
+         
         </>
       );
+
   }
   return <EmptyLibrary show={showAlert}/>; 
 }
 
-//   useEffect(() => {
-//     FetchBooks();  
-//   }, [books])
-//   }
-// }
 
 export default BestBooks;
 
