@@ -36,28 +36,39 @@ function handleSubmit = async(event)=>{
 
 
   return (
-    <Modal show={show} onHide={handleClose}>
-    <div
-      className="modal show"
-      style={{ display: 'block', position: 'initial' }}
-    >
-      <Modal.Dialog>
+    <Modal {...props}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered>
+
         <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title>Add a Book!</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <p>Modal body text goes here.</p>
+        <div className='form-container'>
+           <Form onSubmit={handleSubmit}>
+              <Form.Group className="bookForm3" controlId="bookForm">
+                   <Form.Control onChange={handleChange} name='title' placeholder="Book Title" />
+                   <Form.Control onChange={handleChange} name='description' placeholder='Book Description' />
+                   <Form.Select onChange={handleChange} name='status' aria-label="Default select example">
+                      <option>Reading Status</option>
+                      <option value="Want to Read">Want to Read</option>
+                      <option value="Currently Reading">Currently Reading</option>
+                      <option value="Favorites">Favorites</option>
+                      <option value="Recommended">Recommended</option>
+                            </Form.Select>
+                    <Button type='submit'>Save Book</Button>
+                 </Form.Group>
+             </Form>
+                </div>
         </Modal.Body>
-
         <Modal.Footer>
-          <Button variant="secondary">Close</Button>
-          <Button variant="primary">Save changes</Button>
+                    <Button type='submit' variant="primary">Save Book</Button>
+          <Button onClick={props.onHide} variant="secondary">Close</Button>
         </Modal.Footer>
-      </Modal.Dialog>
-    </div>
     </Modal>
   );
 }
 
-export default StaticExample;
+export default BookFormModal;
