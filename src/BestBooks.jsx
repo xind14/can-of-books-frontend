@@ -70,6 +70,7 @@ function BestBooks(props) {
       </>
     );
   }
+  return <BookFormModal setBooks={setBooks} books={[]}/>;
   return <EmptyLibrary show={showAlert} />;
 }
 

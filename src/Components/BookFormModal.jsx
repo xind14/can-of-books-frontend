@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 
-function BookFormModal({ setBooks,books, onHide }) {
+function BookFormModal(props){
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
@@ -32,8 +32,6 @@ function BookFormModal({ setBooks,books, onHide }) {
     try {
       let response = await axios.post(`${url}/books`, book);
       console.log('Server Response', response.data);
-      setBooks((prevBooks)=>[...prevBooks, response.data]);
-      onHide();
     } catch (error) {
       console.error(error.message);
     }
@@ -45,7 +43,7 @@ function BookFormModal({ setBooks,books, onHide }) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       show={true} // Assuming you want to show the modal by default
-      onHide={onHide}
+      onHide={props.onHide}
     >
       <Modal.Header closeButton>
         <Modal.Title>Add a Book!</Modal.Title>
