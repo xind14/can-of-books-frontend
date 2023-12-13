@@ -61,6 +61,8 @@ function BestBooks(props) {
                   <p>{book.description}</p>
                   <p>{book.status}</p>
                   <span onClick={handleDelete} id={book._id} style={{ marginLeft: ".5em", color: "red", cursor: "pointer",fontSize:'30px'}}>Delete Book</span>
+                  <span onClick={handleDelete} id={book._id} style={{ marginLeft: ".5em", color: "red", cursor: "pointer",fontSize:'30px'}}>Update Book</span>
+
                 </Carousel.Caption>
               </Carousel.Item>
             );
