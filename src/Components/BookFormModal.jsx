@@ -3,25 +3,13 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useState } from 'react';
 import axios from 'axios';
-import { Alert } from 'react-bootstrap';
-
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 
-
-function BookFormModal(props){
-
+function BookFormModal({ setBooks,books, onHide }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
-  const [showSaveAlert, setShowSaveAlert] = useState(false);
-
-  const resetForm = () => {
-    setTitle('');
-    setDescription('');
-    setStatus('');
-  };
-
 
   function handleChange(event) {
     let name = event.target.name;
@@ -36,9 +24,7 @@ function BookFormModal(props){
       setStatus(value);
     }
   }
-  const handleAlertDismiss = () => {
-    setShowSaveAlert(false);
-  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     let book = { title, description, status };
@@ -46,29 +32,23 @@ function BookFormModal(props){
     try {
       let response = await axios.post(`${url}/books`, book);
       console.log('Server Response', response.data);
-
-      setShowSaveAlert(true);
-      resetForm();
-
+      setBooks((prevBooks)=>[...prevBooks, response.data]);
+      onHide();
     } catch (error) {
       console.error(error.message);
     }
   };
-
 
   return (
     <Modal
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-
-      show={true} 
-      onHide={props.onHide}
-
+      show={true} // Assuming you want to show the modal by default
+      onHide={onHide}
     >
       <Modal.Header closeButton>
         <Modal.Title>Add a Book!</Modal.Title>
-        
       </Modal.Header>
 
       <Modal.Body>
@@ -79,19 +59,15 @@ function BookFormModal(props){
                 onChange={handleChange}
                 name="title"
                 placeholder="Book Title"
-                value={title}
               />
               <Form.Control
                 onChange={handleChange}
                 name="description"
                 placeholder="Book Description"
-                value={description}
-
               />
               <Form.Select
                 onChange={handleChange}
                 name="status"
-                value={status}
                 aria-label="Default select example"
               >
                 <option>Reading Status</option>
@@ -109,16 +85,7 @@ function BookFormModal(props){
       </Modal.Body>
 
       <Modal.Footer>
-
-              <Alert show={showSaveAlert} variant="success"  dismissible onClose={handleAlertDismiss}>
-          Book saved successfully!
-        </Alert>
-        <Button type="submit" variant="primary" onClick={handleSubmit}>
-                Save Book
-              </Button>
-
-      <Button onClick={props.onHide} variant="secondary">
-
+        <Button onClick={onHide} variant="secondary">
           Close
         </Button>
       </Modal.Footer>
