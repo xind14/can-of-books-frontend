@@ -8,7 +8,9 @@ import { Alert } from 'react-bootstrap';
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 
+
 function BookFormModal(props){
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
@@ -44,8 +46,10 @@ function BookFormModal(props){
     try {
       let response = await axios.post(`${url}/books`, book);
       console.log('Server Response', response.data);
+
       setShowSaveAlert(true);
       resetForm();
+
     } catch (error) {
       console.error(error.message);
     }
@@ -57,8 +61,10 @@ function BookFormModal(props){
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+
       show={true} 
       onHide={props.onHide}
+
     >
       <Modal.Header closeButton>
         <Modal.Title>Add a Book!</Modal.Title>
@@ -94,12 +100,16 @@ function BookFormModal(props){
                 <option value="Favorites">Favorites</option>
                 <option value="Recommended">Recommended</option>
               </Form.Select>
+              <Button type="submit" variant="primary">
+                Save Book
+              </Button>
             </Form.Group>
           </Form>
         </div>
       </Modal.Body>
 
       <Modal.Footer>
+
               <Alert show={showSaveAlert} variant="success"  dismissible onClose={handleAlertDismiss}>
           Book saved successfully!
         </Alert>
@@ -108,6 +118,7 @@ function BookFormModal(props){
               </Button>
 
       <Button onClick={props.onHide} variant="secondary">
+
           Close
         </Button>
       </Modal.Footer>
