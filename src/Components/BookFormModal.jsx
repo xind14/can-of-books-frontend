@@ -5,8 +5,6 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Alert } from 'react-bootstrap';
 
-import { Alert } from 'react-bootstrap';
-
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 
@@ -14,14 +12,6 @@ function BookFormModal(props){
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
-  const [showSaveAlert, setShowSaveAlert] = useState(false);
-
-  const resetForm = () => {
-    setTitle('');
-    setDescription('');
-    setStatus('');
-  };
-
   const [showSaveAlert, setShowSaveAlert] = useState(false);
 
   const resetForm = () => {
@@ -47,9 +37,6 @@ function BookFormModal(props){
   const handleAlertDismiss = () => {
     setShowSaveAlert(false);
   };
-  const handleAlertDismiss = () => {
-    setShowSaveAlert(false);
-  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     let book = { title, description, status };
@@ -65,7 +52,6 @@ function BookFormModal(props){
   };
 
 
-
   return (
     <Modal
       size="lg"
@@ -76,7 +62,6 @@ function BookFormModal(props){
     >
       <Modal.Header closeButton>
         <Modal.Title>Add a Book!</Modal.Title>
-        
         
       </Modal.Header>
 
@@ -89,7 +74,6 @@ function BookFormModal(props){
                 name="title"
                 placeholder="Book Title"
                 value={title}
-                value={title}
               />
               <Form.Control
                 onChange={handleChange}
@@ -97,13 +81,10 @@ function BookFormModal(props){
                 placeholder="Book Description"
                 value={description}
 
-                value={description}
-
               />
               <Form.Select
                 onChange={handleChange}
                 name="status"
-                value={status}
                 value={status}
                 aria-label="Default select example"
               >
