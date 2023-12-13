@@ -14,10 +14,10 @@ function BestBooks(props) {
 
   const handleDelete = async (event) => {
     try {
-      let response = await axios.delete(`${url}/books${event.target.id}`);
+      let response = await axios.delete(`${url}/books/${event.target.id}`);
       let book = response.data;
       let newBooks = books.filter((book) => {
-        return book.id !== event.target.id;
+        return book._id !== event.target.id;
       });
       setBooks(newBooks);
     } catch (error) {
@@ -60,18 +60,23 @@ function BestBooks(props) {
                   <h3>{book.title}</h3>
                   <p>{book.description}</p>
                   <p>{book.status}</p>
-                  <span onClick={handleDelete} id={book._id} style={{ marginLeft: ".5em", color: "red", cursor: "pointer" }}>Delete Book</span>
+                  <span onClick={handleDelete} id={book._id} style={{ marginLeft: ".5em", color: "red", cursor: "pointer",fontSize:'30px'}}>Delete Book</span>
                 </Carousel.Caption>
               </Carousel.Item>
             );
           })}
         </Carousel>
-        <BookFormModal setBooks={setBooks} books={books} onHide={() => setShowModal(false)} />
 
       </>
     );
+  } else {
+    return (
+      <>
+      <BookFormModal setBooks={setBooks} books={[]}/>
+      <EmptyLibrary show={showAlert} />
+      </>
+    )
   }
-  return <EmptyLibrary show={showAlert} />;
 }
 
 export default BestBooks;
