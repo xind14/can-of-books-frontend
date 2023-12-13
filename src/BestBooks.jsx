@@ -77,6 +77,14 @@ function BestBooks(props) {
       </>
     )
   }
+  } else {
+    return (
+      <>
+      <BookFormModal setBooks={setBooks} books={[]}/>
+      <EmptyLibrary show={showAlert} />
+      </>
+    )
+  }
 }
 
 export default BestBooks;
