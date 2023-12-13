@@ -66,7 +66,6 @@ function BestBooks(props) {
             );
           })}
         </Carousel>
-        <BookFormModal setBooks={setBooks} books={books} onHide={() => setShowModal(false)} />
 
       </>
     );

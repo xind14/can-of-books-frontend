@@ -85,9 +85,6 @@ function BookFormModal({ setBooks,books, onHide }) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={onHide} variant="secondary">
-          Close
-        </Button>
       </Modal.Footer>
     </Modal>
   );
