@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 
-function BookFormModal(props) {
+function BookFormModal({ setBooks,books, onHide }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
@@ -32,8 +32,8 @@ function BookFormModal(props) {
     try {
       let response = await axios.post(`${url}/books`, book);
       console.log('Server Response', response.data);
-      props.setBooks([...props.books, response.data]);
-      props.onHide();
+      setBooks((prevBooks)=>[...prevBooks, response.data]);
+      onHide();
     } catch (error) {
       console.error(error.message);
     }
@@ -41,10 +41,11 @@ function BookFormModal(props) {
 
   return (
     <Modal
-      {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      show={true} // Assuming you want to show the modal by default
+      onHide={onHide}
     >
       <Modal.Header closeButton>
         <Modal.Title>Add a Book!</Modal.Title>
@@ -75,16 +76,16 @@ function BookFormModal(props) {
                 <option value="Favorites">Favorites</option>
                 <option value="Recommended">Recommended</option>
               </Form.Select>
+              <Button type="submit" variant="primary">
+                Save Book
+              </Button>
             </Form.Group>
           </Form>
         </div>
       </Modal.Body>
 
       <Modal.Footer>
-        <Button type="submit" variant="primary">
-          Save Book
-        </Button>
-        <Button onClick={props.onHide} variant="secondary">
+        <Button onClick={onHide} variant="secondary">
           Close
         </Button>
       </Modal.Footer>

@@ -1,33 +1,29 @@
-
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Image } from 'react-bootstrap';
-// import Alert from 'react-bootstrap/Alert';
-// import Button from 'react-bootstrap/Button';
 import BookFormModal from './Components/BookFormModal';
 import EmptyLibrary from './Components/EmptyLibrary';
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 console.log(url);
 
-  
 function BestBooks(props) {
   const [books, setBooks] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
-  const handleDelete = async(event)=>{
-    try{
-  let response = await axios.delete(`${url}/books${event.target.id}`);
-  let book = response.data;
-  let newBooks = books.filter((book) => {
-    return book.id !== event.target.id;
-  })
-  setBooks(newBooks);
-} catch (error) { 
-  console.error(error.message)
- }
+  const handleDelete = async (event) => {
+    try {
+      let response = await axios.delete(`${url}/books${event.target.id}`);
+      let book = response.data;
+      let newBooks = books.filter((book) => {
+        return book.id !== event.target.id;
+      });
+      setBooks(newBooks);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const FetchBooks = async () => {
     try {
@@ -37,58 +33,45 @@ function BestBooks(props) {
       setBooks(response.data);
       if (response.data.length === 0) {
         setShowAlert(true);
-      } 
-    } catch (error) {
-      console.error(error.message); 
       }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
-  
+
   useEffect(() => {
-    console.log("Mount up")
+    console.log("Mount up");
     FetchBooks();
     return () => {
       console.log("Unmount");
     };
+  }, []);
 
-  },[]);
-  
-    if (books.length > 0) {  
-      return (
-        <>
-          <Carousel>
-            <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-            {books.map((book) => {
-              return(
-                <Carousel.Item key={book._id}>
-                  <Image style ={{width: '100%'}}src='/images/placeholder.png' alt='image of bookcover' />
-                  <Carousel.Caption>
-                    <h3>{book.title}</h3>
-                    <p>{book.description}</p>
-                    <p>{book.status}</p>
-                    <span onClick={handleDelete} id={book._id} style={{ marginLeft:".5em", color:"red", cursor:"pointer"}}>Delete Book</span>
-                  </Carousel.Caption>
+  if (books.length > 0) {
+    return (
+      <>
+        <Carousel>
+          <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
+          {books.map((book) => {
+            return (
+              <Carousel.Item key={book._id}>
+                <Image style={{ width: '100%' }} src='/images/placeholder.png' alt='image of bookcover' />
+                <Carousel.Caption>
+                  <h3>{book.title}</h3>
+                  <p>{book.description}</p>
+                  <p>{book.status}</p>
+                  <span onClick={handleDelete} id={book._id} style={{ marginLeft: ".5em", color: "red", cursor: "pointer" }}>Delete Book</span>
+                </Carousel.Caption>
+              </Carousel.Item>
+            );
+          })}
+        </Carousel>
+        <BookFormModal setBooks={setBooks} books={books} onHide={() => setShowModal(false)} />
 
-                </Carousel.Item>
-              );           
-            })}
-          </Carousel>
-          <BookFormModal setBooks={setBooks} books={books} show={showModal} onHide={() => setShowModal(false)}></BookFormModal>
-         
-        </>
-      );
-
+      </>
+    );
   }
-  return <EmptyLibrary show={showAlert}/>; 
-  
+  return <EmptyLibrary show={showAlert} />;
 }
-}
-
 
 export default BestBooks;
-
-
-
-
-
-
-
