@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Image } from 'react-bootstrap';
@@ -15,9 +15,9 @@ console.log(url);
 function BestBooks(props) {
   const [books, setBooks] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
-  const [modalShow, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  function handleDelete = async(event)=>{
+  const handleDelete = async(event)=>{
     try{
   let response = await axios.delete(`${url}/books${event.target.id}`);
   let book = response.data;
@@ -27,7 +27,7 @@ function BestBooks(props) {
   setBooks(newBooks);
 } catch (error) { 
   console.error(error.message)
- };
+ }
 
   const FetchBooks = async () => {
     try {
@@ -48,8 +48,9 @@ function BestBooks(props) {
     FetchBooks();
     return () => {
       console.log("Unmount");
-    }
-  });
+    };
+
+  },[]);
   
     if (books.length > 0) {  
       return (
@@ -71,13 +72,15 @@ function BestBooks(props) {
               );           
             })}
           </Carousel>
-          <BookFormModal setBooks={setBooks} books={books} show={modalShow} onHide={() => setModalShow(false)}></BookFormModal>
+          <BookFormModal setBooks={setBooks} books={books} show={showModal} onHide={() => setShowModal(false)}></BookFormModal>
          
         </>
       );
 
   }
   return <EmptyLibrary show={showAlert}/>; 
+  
+}
 }
 
 
