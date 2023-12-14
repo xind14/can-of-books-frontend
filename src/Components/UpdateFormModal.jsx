@@ -8,17 +8,13 @@ import { Alert } from 'react-bootstrap';
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 
-function BookFormModal(props){
+function UpdateFormModal(props){
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
   const [showSaveAlert, setShowSaveAlert] = useState(false);
 
-  const resetForm = () => {
-    setTitle('');
-    setDescription('');
-    setStatus('');
-  };
+
 
 
   function handleChange(event) {
@@ -40,12 +36,11 @@ function BookFormModal(props){
   const handleSubmit = async (event) => {
     event.preventDefault();
     let book = { title, description, status };
-    console.log('Sending a book', book);
+    console.log('Updating a book', book);
     try {
       let response = await axios.post(`${url}/books`, book);
       console.log('Server Response', response.data);
       setShowSaveAlert(true);
-      resetForm();
     } catch (error) {
       console.error(error.message);
     }
@@ -57,11 +52,11 @@ function BookFormModal(props){
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      show={true} 
+      show={props.show} 
       onHide={props.onHide}
     >
       <Modal.Header>
-        <Modal.Title>Add a Book!</Modal.Title>
+        <Modal.Title>Update a Book!</Modal.Title>
         
       </Modal.Header>
 
@@ -101,7 +96,7 @@ function BookFormModal(props){
 
       <Modal.Footer>
               <Alert show={showSaveAlert} variant="success"  dismissible onClose={handleAlertDismiss}>
-          Book saved successfully!
+          Book updated successfully!
         </Alert>
         <Button type="submit" variant="primary" onClick={handleSubmit}>
                 Save Book
@@ -115,4 +110,4 @@ function BookFormModal(props){
   );
 }
 
-export default BookFormModal;
+export default UpdateFormModal;
