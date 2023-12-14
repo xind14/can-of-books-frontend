@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Alert } from 'react-bootstrap';
 
 
-const url = import.meta.env.VITE_LOCAL_SERVER;
+const url = import.meta.env.VITE_SERVER;
 
 function UpdateFormModal(props){
   const [title, setTitle] = useState('');
