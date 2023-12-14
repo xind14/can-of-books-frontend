@@ -60,7 +60,7 @@ function BookFormModal(props){
       show={true} 
       onHide={props.onHide}
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title>Add a Book!</Modal.Title>
         
       </Modal.Header>

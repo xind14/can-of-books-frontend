@@ -55,7 +55,7 @@ function UpdateFormModal(props){
       show={props.show} 
       onHide={props.onHide}
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title>Update a Book!</Modal.Title>
         
       </Modal.Header>
