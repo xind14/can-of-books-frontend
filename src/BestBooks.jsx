@@ -5,6 +5,8 @@ import { Image } from 'react-bootstrap';
 import BookFormModal from './Components/BookFormModal';
 import EmptyLibrary from './Components/EmptyLibrary';
 import UpdateFormModal from './Components/UpdateFormModal'; 
+import {Button} from 'react-bootstrap';
+
 
 const url = import.meta.env.VITE_LOCAL_SERVER;
 console.log(url);
@@ -91,14 +93,14 @@ function BestBooks(props) {
               <Carousel.Item key={book._id}>
                 <Image style={{ width: '100%' }} src='/images/placeholder.png' alt='image of bookcover' />
                 <Carousel.Caption>
-                  <h3>{book.title}</h3>
-                  <p>{book.description}</p>
-                  <p>{book.status}</p>
+                  <h2  style={{ marginLeft: ".5em", background:"beige", color: "red", cursor: "pointer", fontSize: '50px', border:"solid black", borderRadius:"20px"  }}>{book.title}</h2>
+                  <p  style={{ marginLeft: ".5em", background:"beige", color: "red", cursor: "pointer", fontSize: '40px' }}>{book.description}</p>
+                  <p  style={{ marginLeft: ".5em", background:"beige", color: "red", cursor: "pointer", fontSize: '30px' }}>{book.status}</p>
 
-                  <span onClick={handleDelete} id={book._id} style={{ marginLeft: ".5em", color: "red", cursor: "pointer", fontSize: '30px' }}>Delete Book
-                  </span>
+                  <Button onClick={handleDelete}  variant="secondary" id={book._id} style={{ marginLeft: ".5em", background:"beige", color: "red", cursor: "pointer", fontSize: '30px' }}>Delete Book
+                  </Button>
 
-                  <span onClick={() => selectBook(book)} style={{ marginLeft: ".5em", color: "red", cursor: "pointer", fontSize:'30px'}}>Update Book</span>      
+                  <Button onClick={() => selectBook(book)}  variant="secondary" style={{ marginLeft: ".5em", background:"beige",color: "red", cursor: "pointer", fontSize:'30px'}}>Update Book</Button>      
                              
                 </Carousel.Caption>
               </Carousel.Item>
