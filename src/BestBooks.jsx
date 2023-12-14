@@ -50,12 +50,12 @@ function BestBooks(props) {
   if (books.length > 0) {
     return (
       <>
-        <Carousel>
+        <Carousel style={{ width:'50%', marginLeft: '25%' }}>
           <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
           {books.map((book) => {
             return (
               <Carousel.Item key={book._id}>
-                <Image style={{ width: '100%' }} src='/images/placeholder.png' alt='image of bookcover' />
+                <Image style={{ width: '100%'}} src='/images/bookcover.jpg' alt='image of bookcover' />
                 <Carousel.Caption>
                   <h3>{book.title}</h3>
                   <p>{book.description}</p>
