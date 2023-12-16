@@ -1,63 +1,43 @@
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { Form } from 'react-bootstrap';
-import { useState } from 'react';
-import axios from 'axios';
-import { Alert } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import { Form } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Alert } from "react-bootstrap";
 
+const url = import.meta.env.VITE_LOCAL_SERVER;
 
-const url = import.meta.env.VITE_SERVER;
-
-function UpdateFormModal(props){
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('');
-  const [showSaveAlert, setShowSaveAlert] = useState(false);
-
-
-
+function UpdateFormModal(props) {
+  const [showUpdateAlert, setShowUpdateAlert] = useState(false);
+  const [book, setBook] = useState({});
 
   function handleChange(event) {
-    let name = event.target.name;
-    let value = event.target.value;
-    if (name === 'title') {
-      setTitle(value);
-    }
-    if (name === 'description') {
-      setDescription(value);
-    }
-    if (name === 'status') {
-      setStatus(value);
-    }
+    setBook({ ...book, [event.target.name]: event.target.value });
   }
   const handleAlertDismiss = () => {
-    setShowSaveAlert(false);
+    setShowUpdateAlert(false);
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    let book = { title, description, status };
-    console.log('Updating a book', book);
-    try {
-      let response = await axios.post(`${url}/books`, book);
-      console.log('Server Response', response.data);
-      setShowSaveAlert(true);
-    } catch (error) {
-      console.error(error.message);
-    }
+    props.handleSubmit(book);
+    console.log("Updating a book", book);
+    setBook({ title: "", description: "", status: "" });
+    setShowUpdateAlert(true);
   };
-
+  useEffect(() => {
+    console.log("props.updateBook changed");
+    setBook(props.book || {});
+  }, [props.book]);
 
   return (
     <Modal
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      show={props.show} 
+      show={props.show}
       onHide={props.onHide}
     >
       <Modal.Header>
         <Modal.Title>Update a Book!</Modal.Title>
-        
       </Modal.Header>
 
       <Modal.Body>
@@ -68,22 +48,21 @@ function UpdateFormModal(props){
                 onChange={handleChange}
                 name="title"
                 placeholder="Book Title"
-                value={title}
+                defaultValue={props.book.title}
               />
               <Form.Control
                 onChange={handleChange}
                 name="description"
                 placeholder="Book Description"
-                value={description}
-
+                defaultValue={props.book.description}
               />
               <Form.Select
                 onChange={handleChange}
                 name="status"
-                value={status}
+                defaultValue={props.book.status}
                 aria-label="Default select example"
               >
-                <option>Reading Status</option>
+                <option value="" disabled>Reading Status</option>
                 <option value="Want to Read">Want to Read</option>
                 <option value="Currently Reading">Currently Reading</option>
                 <option value="Favorites">Favorites</option>
@@ -95,14 +74,19 @@ function UpdateFormModal(props){
       </Modal.Body>
 
       <Modal.Footer>
-              <Alert show={showSaveAlert} variant="success"  dismissible onClose={handleAlertDismiss}>
+        <Alert
+          show={showUpdateAlert}
+          variant="success"
+          dismissible
+          onClose={handleAlertDismiss}
+        >
           Book updated successfully!
         </Alert>
         <Button type="submit" variant="primary" onClick={handleSubmit}>
-                Save Book
-              </Button>
+          Update Book
+        </Button>
 
-      <Button onClick={props.onHide} variant="secondary">
+        <Button onClick={props.onHide} variant="secondary">
           Close
         </Button>
       </Modal.Footer>

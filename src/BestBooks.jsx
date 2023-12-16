@@ -8,7 +8,7 @@ import UpdateFormModal from './Components/UpdateFormModal';
 import {Button} from 'react-bootstrap';
 
 
-const url = import.meta.env.VITE_SERVER;
+const url = import.meta.env.VITE_LOCAL_SERVER;
 console.log(url);
 
 function BestBooks(props) {
@@ -53,10 +53,10 @@ function BestBooks(props) {
 
   }
 
-  const handleUpdate = async (event) => {
+  const handleUpdate = async (book) => {
     try {
       console.log('Updating book...');
-      let response = await axios.put(`${url}/books/${event.target.id}`);
+      let response = await axios.put(`${url}/books/${book._id}`, book);
       let updatedBook = response.data;
       console.log("From the server, the book is:", updatedBook);
       let newBooksList = books.map(book => {
@@ -109,7 +109,7 @@ function BestBooks(props) {
         </Carousel>
         {showUpdateModal && (<UpdateFormModal
        handleSubmit={handleUpdate}
-            books={selectedBook}
+            book={selectedBook}
             show={showUpdateModal}  
             onHide={() => setShowUpdateModal(false)}
           />  ) 
@@ -121,8 +121,8 @@ function BestBooks(props) {
   } else {
     return (
       <>
-        <BookFormModal setBooks={setBooks} books={[]} />
-              
+                      <BookFormModal setBooks={setBooks} books={books} />
+
              <EmptyLibrary show={showAlert} />
       </>
     );
