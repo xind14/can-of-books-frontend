@@ -8,7 +8,7 @@ import UpdateFormModal from './Components/UpdateFormModal';
 import {Button} from 'react-bootstrap';
 
 
-const url = import.meta.env.VITE_LOCAL_SERVER;
+const url = import.meta.env.VITE_SERVER;
 console.log(url);
 
 function BestBooks(props) {
